@@ -117,4 +117,11 @@ public class MainActivity extends AppCompatActivity {
                 });
         startDialog.show();
     }
+
+    protected void doConvert(){
+        double db = Double.parseDouble(inputTxt.getText().toString());
+        RadioButton rb = (RadioButton) findViewById(unitType.getCheckedRadioButtonId());
+        double inp = convertUnit(rb.getText().toString(), unitOri.getSelectedItem().toString(), unitConv.getSelectedItem().toString(), db);
+        outputTxt.setText(strResult(inp, roundBox.isChecked()));
+    }
 }
