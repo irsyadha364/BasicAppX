@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -62,6 +64,43 @@ public class MainActivity extends AppCompatActivity {
         roundBox = (CheckBox) findViewById(R.id.chkRounded);
         formBox = (CheckBox) findViewById(R.id.chkFormula);
         imgView = (ImageView) findViewById(R.id.img);
+
+        unitType.setOnCheckedChangeListener(
+                new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton radbut = (RadioButton) findViewById(checkedId);
+                        ArrayAdapter<CharSequence> arr;
+                        inputTxt.setText("0");
+                        outputTxt.setText("0");
+                        switch (radbut.getId()){
+                            case R.id.rbTemp:
+                                arr = ArrayAdapter.createFromResource(unitType.getContext(),
+                                        R.array.tempList, android.R.layout.simple_spinner_item);
+                                imgView.setImageResource(R.drawable.temperature);
+                                arr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                unitOri.setAdapter(arr);
+                                unitConv.setAdapter(arr);
+                                break;
+                            case R.id.rbDist:
+                                arr = ArrayAdapter.createFromResource(unitType.getContext(),
+                                        R.array.distList, android.R.layout.simple_spinner_item);
+                                imgView.setImageResource(R.drawable.distance);
+                                arr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                unitOri.setAdapter(arr);
+                                unitConv.setAdapter(arr);
+                                break;
+                            case R.id.rbWeight:
+                                arr = ArrayAdapter.createFromResource(unitType.getContext(),
+                                        R.array.weightList, android.R.layout.simple_spinner_item);
+                                imgView.setImageResource(R.drawable.weight);
+                                arr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                unitOri.setAdapter(arr);
+                                unitConv.setAdapter(arr);
+                                break;
+                        }
+                    }
+                });
     }
 
     protected void onStart(){
