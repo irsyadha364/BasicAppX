@@ -3,6 +3,7 @@ package org.aplas.basicappx;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,5 +53,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        convertBtn = (Button) findViewById(R.id.convertButton);
+        inputTxt = (EditText) findViewById(R.id.inputText);
+        outputTxt = (EditText) findViewById(R.id.outputText);
+        unitOri = (Spinner) findViewById(R.id.oriList);
+        unitConv = (Spinner) findViewById(R.id.convList);
+        unitType = (RadioGroup) findViewById(R.id.radioGroup);
+        roundBox = (CheckBox) findViewById(R.id.chkRounded);
+        formBox = (CheckBox) findViewById(R.id.chkFormula);
+        imgView = (ImageView) findViewById(R.id.img);
+    }
+
+    protected void onStart(){
+        super.onStart();
+
+        startDialog = new AlertDialog.Builder(MainActivity.this).create();
+        startDialog.setTitle("Application started");
+        startDialog.setMessage("This app can use to convert any units");
+        startDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        startDialog.show();
     }
 }
